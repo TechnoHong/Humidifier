@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {Layout, Menu, MenuProps} from 'antd'
 import {Outlet, useLocation, useNavigate} from 'react-router-dom'
+import NavigationLoginItem from '../components/NavigationLoginItem'
 
 const {Header, Content, Footer} = Layout
 
@@ -12,11 +13,10 @@ const MainScreen = () => {
 
   useEffect(() => {
     setCurrentMenu(location.pathname)
-  }, [])
+  }, [location])
 
   const onClickMenu: MenuProps['onClick'] = e => {
     console.log('click ', e)
-    setCurrentMenu(e.key)
   }
 
   const items = [
@@ -29,8 +29,8 @@ const MainScreen = () => {
       label: <div onClick={() => navigate('/empty')}>일단 빈페이지</div>,
     },
     {
-      key: 'menu3',
-      label: <div onClick={() => navigate(-1)}>일단 뒤로가기</div>,
+      key: '/profile', // 프로필로 바꾸자, 로그인에는 불안들어와도될듯
+      label: <NavigationLoginItem />,
     },
   ]
 
