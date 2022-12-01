@@ -10,6 +10,7 @@ import AuthContext from './service/auth/store/authContext'
 import AuthPage from './modules/auth/AuthPage'
 import CreateAccount from './modules/auth/CreateAccount'
 import ProfilePage from './modules/auth/ProfilePage'
+import SpellingBeeContainer from './modules/spellingBee/SpellingBeeContainer'
 
 function App() {
   const authCtx = useContext(AuthContext)
@@ -33,6 +34,7 @@ function App() {
           path='/profile'
           element={!authCtx.isLoggedIn ? <Navigate to='/' /> : <ProfilePage />}
         />
+        <Route path='/spellingBee' element={<SpellingBeeContainer />} />
       </Route>
     </Routes>
   )

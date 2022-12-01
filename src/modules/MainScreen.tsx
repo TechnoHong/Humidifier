@@ -29,8 +29,12 @@ const MainScreen = () => {
       label: <div onClick={() => navigate('/empty')}>일단 빈페이지</div>,
     },
     {
-      key: '/profile', // 프로필로 바꾸자, 로그인에는 불안들어와도될듯
+      key: '/profile',
       label: <NavigationLoginItem />,
+    },
+    {
+      key: '/spellingBee',
+      label: <div onClick={() => navigate('/spellingBee')}>SpellingBee</div>,
     },
   ]
 
