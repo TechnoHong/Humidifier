@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Hexagons from './Hexagons'
 import RcQueueAnim from 'rc-queue-anim'
 import SpellingBeeInput from './SpellingBeeInput'
@@ -7,6 +7,7 @@ import SpellingBeeTable from './SpellingBeeTable'
 import SpellingBeeLevel from './SpellingBeeLevel'
 import validationWord from '../../service/ValidationWord'
 import {message} from 'antd'
+import styled from 'styled-components'
 
 export type HexaKey = {
   key: string
@@ -26,6 +27,7 @@ const SpellingBeeContainer = () => {
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
   const [messageApi, contextHolder] = message.useMessage()
+  const ref = useRef<HTMLDivElement>(null)
   const [spells, setSpells] = useState<HexaKey[]>([
     {
       key: 'A',
@@ -144,6 +146,7 @@ const SpellingBeeContainer = () => {
     }
     for (const item of history) {
       if (item.words === word) {
+        // Duplicated Word
         messageApi.open({
           type: 'warning',
           content: ' 이미 찾은 단어에요. ',
@@ -162,8 +165,30 @@ const SpellingBeeContainer = () => {
     return null
   }
 
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      submitClickHandler()
+      return
+    }
+
+    if (e.key === 'Backspace') {
+      deleteClickHandler()
+      return
+    }
+
+    spells.forEach(spell => {
+      if (
+        e.key === spell.key.toUpperCase() ||
+        e.key === spell.key.toLowerCase()
+      ) {
+        hexagonClickHandler(spell)
+      }
+      return
+    })
+  }
+
   return (
-    <>
+    <RootContainer onKeyDown={onKeyDown} tabIndex={-1} ref={ref}>
       {contextHolder}
       <RcQueueAnim delay={300} className='queue-simple'>
         <div key='level'>
@@ -187,8 +212,14 @@ const SpellingBeeContainer = () => {
           <SpellingBeeTable history={history} />
         </div>
       </RcQueueAnim>
-    </>
+    </RootContainer>
   )
 }
+
+const RootContainer = styled.div`
+  &:focus {
+    outline: none;
+  }
+`
 
 export default SpellingBeeContainer
