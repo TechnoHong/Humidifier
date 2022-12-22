@@ -11,6 +11,7 @@ import AuthPage from './modules/auth/AuthPage'
 import CreateAccount from './modules/auth/CreateAccount'
 import ProfilePage from './modules/auth/ProfilePage'
 import SpellingBeeContainer from './modules/spellingBee/SpellingBeeContainer'
+import WordleContainer from './modules/wordle/WordleContainer'
 
 function App() {
   const authCtx = useContext(AuthContext)
@@ -35,6 +36,7 @@ function App() {
           element={!authCtx.isLoggedIn ? <Navigate to='/' /> : <ProfilePage />}
         />
         <Route path='/spellingBee' element={<SpellingBeeContainer />} />
+        <Route path='/wordle' element={<WordleContainer />} />
       </Route>
     </Routes>
   )

@@ -36,6 +36,10 @@ const MainScreen = () => {
       key: '/spellingBee',
       label: <div onClick={() => navigate('/spellingBee')}>SpellingBee</div>,
     },
+    {
+      key: '/wordle',
+      label: <div onClick={() => navigate('/wordle')}>Wordle+</div>,
+    },
   ]
 
   return (
