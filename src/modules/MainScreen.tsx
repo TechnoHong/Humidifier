@@ -45,7 +45,7 @@ const MainScreen = () => {
   return (
     <Layout style={{minHeight: '100vh'}}>
       <Header className='layout'>
-        <LogoContainer className='logo' />
+        <LogoContainer />
         <Menu
           style={{borderBottom: '0'}}
           theme='dark'
@@ -65,9 +65,7 @@ const MainScreen = () => {
       >
         <Outlet />
       </Content>
-      <Footer style={{textAlign: 'center'}}>
-        Humidifier ©2022 Created by Hong
-      </Footer>
+      <Footer style={{textAlign: 'center'}}>Fan 2 ©2022 Created by Hong</Footer>
     </Layout>
   )
 }

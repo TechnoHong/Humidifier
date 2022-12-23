@@ -104,7 +104,7 @@ const IntroAnimation = () => {
             ],
           }}
         >
-          Mosiki
+          Welcome!
         </Texty>
         <TweenOne
           className='combined-bar'
@@ -123,15 +123,15 @@ const IntroAnimation = () => {
           delay={2200}
           interval={30}
         >
-          mosiki mosiki jusiki jusiki mosiki mosiki jusiki jusiki
+          {'ALL New 선풍기 Season 2 (' +
+            process.env.REACT_APP_VERSION +
+            ' ver)'}
         </Texty>
       </div>
     </IntroContainer>
   )
 }
 
-const IntroContainer = styled.div`
-  margin-bottom: 1rem;
-`
+const IntroContainer = styled.div``
 
 export default IntroAnimation

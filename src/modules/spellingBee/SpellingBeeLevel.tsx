@@ -8,22 +8,22 @@ interface LevelProps {
 const SpellingBeeLevel = ({count}: LevelProps) => {
   const items = [
     {
-      title: 'B',
+      title: 'Bronze',
     },
     {
-      title: 'S',
+      title: 'Silver',
     },
     {
-      title: 'G',
+      title: 'Gold',
     },
     {
-      title: 'P',
+      title: 'Platinum',
     },
     {
-      title: 'D',
+      title: 'Diamond',
     },
     {
-      title: 'M',
+      title: 'Master',
     },
   ]
 
