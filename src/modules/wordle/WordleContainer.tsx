@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import WordleDropdown from './WordleDropdown'
 import {Button, Input, message} from 'antd'
+import {DeleteOutlined} from '@ant-design/icons'
 import WordleGameBoard from './WordleGameBoard'
 import styled from 'styled-components'
 import validationWord from '../../service/ValidationWord'
@@ -18,7 +19,7 @@ const WordleContainer = () => {
   const [messageApi, contextHolder] = message.useMessage()
   const tryCounts = [6, 7, 9]
   const answers = [
-    ['VIVID'],
+    ['SUPER'],
     ['MINDS', 'MERRY'],
     ['PROXY', 'LOVES', 'MOVIE', 'GOOSE'],
   ]
@@ -97,24 +98,6 @@ const WordleContainer = () => {
     setInputValue(value)
   }
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    e.preventDefault()
-    const expression = /^[a-zA-Z]*$/
-
-    if (e.key === 'Enter') {
-      onSubmitWord(inputValue, getLevelType(difficulty))
-      return
-    }
-
-    if (e.key === 'Backspace') {
-      setInputValue(inputValue.slice(0, -1))
-      return
-    }
-
-    if (expression.test(e.key) && e.key.length === 1)
-      setInputValue(inputValue + e.key.toUpperCase())
-  }
-
   const checkWordRule = (word: string) => {
     if (word.length !== 5) {
       messageApi.open({
@@ -160,6 +143,14 @@ const WordleContainer = () => {
     return wordleGame
   }
 
+  const clearAllWordleHistory = () => {
+    localStorage.removeItem('wordle_single')
+    localStorage.removeItem('wordle_double')
+    localStorage.removeItem('wordle_quadruple')
+
+    location.reload()
+  }
+
   return (
     <WordleRootContainer>
       {contextHolder}
@@ -174,10 +165,17 @@ const WordleContainer = () => {
         loading={loading}
         allowClear
       />
-      <WordleDropdown
-        difficulty={difficulty}
-        onChangeDifficulty={onChangeDifficulty}
-      />
+      <WordleOptionsContainer>
+        <Button
+          type='ghost'
+          shape='circle'
+          icon={<DeleteOutlined onClick={clearAllWordleHistory} />}
+        />
+        <WordleDropdown
+          difficulty={difficulty}
+          onChangeDifficulty={onChangeDifficulty}
+        />
+      </WordleOptionsContainer>
       <WordleBoards>{boards}</WordleBoards>
     </WordleRootContainer>
   )
@@ -197,6 +195,14 @@ const WordleBoards = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+`
+
+const WordleOptionsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20rem;
+  margin-top: 0.5rem;
 `
 
 export default WordleContainer

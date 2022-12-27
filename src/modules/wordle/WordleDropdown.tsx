@@ -33,10 +33,7 @@ const WordleDropdown = ({
     <Dropdown
       menu={{items, selectable: true, defaultSelectedKeys: [difficulty]}}
     >
-      <a
-        style={{width: '20rem', margin: '0.5rem 0', textAlign: 'end'}}
-        onClick={e => e.preventDefault()}
-      >
+      <a onClick={e => e.preventDefault()}>
         <Space>
           options
           <DownOutlined />

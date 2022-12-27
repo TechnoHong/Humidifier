@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import RcQueueAnim from 'rc-queue-anim'
 import styled from 'styled-components'
 
@@ -13,34 +13,24 @@ interface boardProps {
   tryCount: number
 }
 
-type WordleStatusType = 'Progressing' | 'Success' | 'Failure'
+type WordleStatusType = 'Start' | 'Progressing' | 'Success' | 'Failure'
 export type WordStateType = 'Nothing' | 'Filled' | 'Ball' | 'Strike'
 export type lineType = wordType[]
 
 const WordleGameBoard = ({answer, words, tryCount}: boardProps) => {
-  const [status, setStatus] = useState<WordleStatusType>('Progressing')
-
   const checkStatus = (
     words: string[] | undefined,
     answer: string,
   ): WordleStatusType => {
-    if (!words) return 'Progressing'
+    if (!words) return 'Start'
     for (let i = 0; i < words.length; i++) {
       if (words[i] === answer) return 'Success'
     }
-    if (words.length === 6) {
+    if (words.length >= tryCount) {
       return 'Failure'
     }
     return 'Progressing'
   }
-
-  useEffect(() => {
-    setStatus(checkStatus(words, answer))
-  }, [])
-
-  useEffect(() => {
-    console.log(status)
-  }, [status])
 
   const setGameData = () => {
     const line = []
@@ -98,6 +88,9 @@ const WordleGameBoard = ({answer, words, tryCount}: boardProps) => {
   return (
     <WordleBoard>
       <RcQueueAnim delay={300}>{setGameData()}</RcQueueAnim>
+      <WordleDimmed boardStatus={checkStatus(words, answer)}>
+        {handlerBoardType(checkStatus(words, answer)).text}
+      </WordleDimmed>
     </WordleBoard>
   )
 }
@@ -116,8 +109,40 @@ const handlerColorType = (state: WordStateType) => {
   }
 }
 
+const handlerBoardType = (status: WordleStatusType) => {
+  switch (status) {
+    case 'Success':
+      return {bg: '#000000', text: ''}
+    case 'Failure':
+      return {bg: '#000000', text: ''}
+    case 'Progressing':
+    case 'Start':
+      return {bg: '', text: ''}
+  }
+}
+
 const WordleBoard = styled.div`
+  position: relative;
   margin: 1rem;
+`
+
+const WordleDimmed = styled.div<{boardStatus: WordleStatusType}>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  border-radius: 5px;
+
+  background: ${props => handlerBoardType(props.boardStatus).bg};
+  opacity: 0.2;
+
+  font-size: 2rem;
+  color: #ffffff;
+  text-align: center;
+
+  transition: all linear 500ms;
 `
 
 const WordleWord = styled.div`

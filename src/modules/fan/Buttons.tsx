@@ -1,20 +1,26 @@
 import React from 'react'
-import {Button, Radio} from 'antd'
-import {CaretUpOutlined, CaretDownOutlined} from '@ant-design/icons'
+import {Button, Segmented, Slider} from 'antd'
+import {
+  CaretUpOutlined,
+  CaretDownOutlined,
+  UndoOutlined,
+} from '@ant-design/icons'
 import styled from 'styled-components'
 
 type ButtonsProps = {
   speed: number
-  fanStyle: string
   onChangeSpeed: (amount: number) => void
-  onChangeFanStyle: (fanStyle: string) => void
+  onClickRotate: () => void
+  onChangeSliderSpeed: (value: number) => void
+  onChangeFanModel: (value: string | number) => void
 }
 
 const Buttons = ({
   speed,
   onChangeSpeed,
-  fanStyle,
-  onChangeFanStyle,
+  onClickRotate,
+  onChangeSliderSpeed,
+  onChangeFanModel,
 }: ButtonsProps) => {
   const isControlFaster = (speed: number) => {
     return speed < 1
@@ -25,23 +31,19 @@ const Buttons = ({
   }
   return (
     <ButtonsContainer>
-      <Radio.Group
-        size='small'
-        defaultValue={fanStyle}
-        buttonStyle='solid'
-        onChange={e => onChangeFanStyle(e.target.value)}
-      >
-        <Radio.Button value='/assets/propeller_polygon.glb'>
-          Type 1
-        </Radio.Button>
-        <Radio.Button value='/assets/submarine_propeller.glb'>
-          Type 2
-        </Radio.Button>
-        <Radio.Button value='/assets/airplane_propeller.glb'>
-          Type 3
-        </Radio.Button>
-        <Radio.Button value='/assets/vintage_fan.glb'>Type 4</Radio.Button>
-      </Radio.Group>
+      <Segmented
+        options={['선풍기1', '선풍기2', '선풍기3', '선풍기4']}
+        defaultValue={'선풍기1'}
+        onChange={onChangeFanModel}
+      />
+      <Slider
+        style={{width: '20rem'}}
+        min={0}
+        max={1}
+        onChange={onChangeSliderSpeed}
+        value={speed}
+        step={0.001}
+      />
       <Button.Group>
         <Button
           disabled={!isControlFaster(speed)}
@@ -49,6 +51,7 @@ const Buttons = ({
           icon={<CaretUpOutlined />}
           onClick={() => onChangeSpeed(+0.05)}
         />
+        <Button type='dashed' icon={<UndoOutlined />} onClick={onClickRotate} />
         <Button
           disabled={!isControlSlower(speed)}
           type='primary'
