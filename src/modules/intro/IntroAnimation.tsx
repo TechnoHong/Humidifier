@@ -123,9 +123,7 @@ const IntroAnimation = () => {
           delay={2200}
           interval={30}
         >
-          {'ALL New 선풍기 Season 2 (' +
-            process.env.REACT_APP_VERSION +
-            ' ver)'}
+          {'ALL New 선풍기 3D (' + process.env.REACT_APP_VERSION + ' ver)'}
         </Texty>
       </div>
     </IntroContainer>
