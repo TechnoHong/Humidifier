@@ -67,7 +67,7 @@ const MainScreen = () => {
       </Content>
       <Footer style={{textAlign: 'center'}}>Fan 2 ©2022 Created by Hong</Footer>
     </Layout>
-    // branch test
+    // branch test test
   )
 }
 
