@@ -58,14 +58,14 @@ const MainScreen = () => {
       </Header>
       <Content
         style={{
-          padding: '1rem',
+          padding: '1rem 0',
           background: 'var(--bg)',
-          margin: '1rem',
+          margin: '1rem 0',
         }}
       >
         <Outlet />
       </Content>
-      <Footer style={{textAlign: 'center'}}>Fan 2 ©2022 Created by Hong</Footer>
+      <Footer style={{textAlign: 'center'}}>Fan 3D ©2022-2023 Created by Hong</Footer>
     </Layout>
     // branch test test
   )

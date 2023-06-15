@@ -18,11 +18,11 @@ const HomeContainer = () => {
       {/*  </div>*/}
       {/*</RcQueueAnim>*/}
       <Fan />
-      <FloatButton
-        type='primary'
-        tooltip='새 글 작성'
-        onClick={() => navigate('/editor')}
-      />
+      {/*<FloatButton*/}
+      {/*  type='primary'*/}
+      {/*  tooltip='새 글 작성'*/}
+      {/*  onClick={() => navigate('/editor')}*/}
+      {/*/>*/}
     </>
   )
 }
