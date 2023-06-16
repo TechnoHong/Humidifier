@@ -11,7 +11,14 @@ const GoldenFishContainer = ({initPosition}: GoldenFishProps) => {
     const { scene } = useGLTF(process.env.PUBLIC_URL + '/assets/golden_fish.glb')
 
     useFrame(state => {
-        ref.current.position.z += Math.random()
+        const elapsedTime = state.clock.getElapsedTime()
+        const positionZ = Math.sin(elapsedTime / 2)
+        ref.current.position.z += positionZ
+        if (positionZ < 0) {
+            ref.current.rotation.y = Math.PI
+        } else {
+            ref.current.rotation.y = 0
+        }
     })
     return (
         <Clone ref={ref} object={scene} position={[initPosition[0], initPosition[1], initPosition[2]]}/>

@@ -89,7 +89,7 @@ const Fan = () => {
           onChangeSliderSpeed={onChangeSliderSpeed}
           onChangeFanModel={onChangeFanModel}
         />
-        <Button style={{ margin: '0 auto' }} onClick={onAddFish}>금붕어 담그기</Button>
+        <Button style={{ margin: '0 auto' }} onClick={onAddFish}>🐟금붕어 담그기</Button>
       </ButtonsWrapper>
     </>
   )
