@@ -26,7 +26,7 @@ const MainScreen = () => {
     },
     {
       key: '/empty',
-      label: <div onClick={() => navigate('/empty')}>일단 빈페이지</div>,
+      label: <div onClick={() => navigate('/empty')}>🚧빈페이지🚧</div>,
     },
     {
       key: '/profile',
@@ -34,11 +34,11 @@ const MainScreen = () => {
     },
     {
       key: '/spellingBee',
-      label: <div onClick={() => navigate('/spellingBee')}>SpellingBee</div>,
+      label: <div onClick={() => navigate('/spellingBee')}>🚧SpellingBee🚧</div>,
     },
     {
       key: '/wordle',
-      label: <div onClick={() => navigate('/wordle')}>Wordle+</div>,
+      label: <div onClick={() => navigate('/wordle')}>🚧Wordle+🚧</div>,
     },
   ]
 

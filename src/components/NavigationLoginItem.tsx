@@ -28,7 +28,7 @@ const NavigationLoginItem = () => {
   return (
     <div>
       {!isLogin ? (
-        <div onClick={() => navigate('/login')}>로그인</div>
+        <div onClick={() => navigate('/login')}>🚧로그인🚧</div>
       ) : (
         <div onClick={() => navigate('/profile')}>{nickname}</div>
       )}
